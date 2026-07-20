@@ -43,7 +43,7 @@ jobs:
           apt-get install jq -y
           echo "Checking before docker daemon.json"
           cat /etc/docker/daemon.json
-          cat /etc/docker/daemon.json | jq '. + { features: [{ "time-namespaces": false }]}' > /etc/docker/daemon.json
+          cat /etc/docker/daemon.json | jq '. + { features: [{ time-namespaces: false }]}' > /etc/docker/daemon.json
           echo "Checking after docker daemon.json"
           cat /etc/docker/daemon.json
           echo "Restarting docker service"
