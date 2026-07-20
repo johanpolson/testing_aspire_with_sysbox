@@ -49,7 +49,7 @@ jobs:
           cat /etc/docker/daemon.json | jq '.features += { "time-namespaces": false }' | tee /etc/docker/daemon.json
           
           echo "Restarting docker service"
-          systemctl restart docker
+          sudo pkill -SIGHUP dockerd
 
       - name: dotnet run
         run: |
