@@ -5,7 +5,7 @@ var builder = DistributedApplication.CreateBuilder(args);
 var tag = builder.Configuration.GetValue("tag", "2.2.0");
 var port = builder.Configuration.GetValue("port", 8200);
 
-var openBao builder.AddContainer("OpenBao", "quay.io/openbao/openbao", tag)
+var openBao = builder.AddContainer("OpenBao", "quay.io/openbao/openbao", tag)
 .WithContainerName("openbao_" + tag)
 .WithEnvironment("BAO_DEV_ROOT_TOKEN_ID", "TestRootTokenId")
 .WithHttpEndpoint(port, 8200, isProxied: false)
