@@ -36,6 +36,8 @@ jobs:
 
           apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 
+          docker info | grep -i runtime
+
       - name: Install Sysbox
         run: |
           apt-get install linux-headers-$(uname -r) -y
@@ -58,6 +60,8 @@ jobs:
 
           # echo "Restarting docker service"
           # pkill -SIGHUP dockerd
+          
+          docker info | grep -i runtime
 
       - name: dotnet run
         run: |
