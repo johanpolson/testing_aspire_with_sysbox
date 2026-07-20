@@ -48,8 +48,8 @@ jobs:
           echo "addinging time-namespaces false to docker daemon.json"
           cat /etc/docker/daemon.json | jq '.features += { "time-namespaces": false }' | tee /etc/docker/daemon.json
           
-          #echo "Restarting docker service"
-          #pkill -SIGHUP dockerd
+          echo "Restarting docker service"
+          pkill -SIGHUP dockerd
 
       - name: dotnet run
         run: |
