@@ -17,7 +17,7 @@ jobs:
 
       - name: Install Sysbox
         run: |
-          apt update
+          apt update -y
           apt install ca-certificates curl
           install -m 0755 -d /etc/apt/keyrings
           curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
@@ -32,15 +32,15 @@ jobs:
           Signed-By: /etc/apt/keyrings/docker.asc
           EOF
 
-          apt update
+          apt update -y
 
-          apt install docker-ce docker-ce-cli
+          apt install docker-ce docker-ce-cli -y
 
       - name: Install Sysbox
         run: |
           wget https://github.com/nestybox/sysbox/releases/download/v0.7.0/sysbox-ce_0.7.0.linux_amd64.deb
           sudo apt-get install ./sysbox-ce_0.7.0.linux_amd64.deb -y
-          sudo apt-get install jq
+          sudo apt-get install jq -y
           sudo echo /etc/docker/daemon.json | jq '. + { features: [{ "time-namespaces": false }]}' > /etc/docker/daemon.json
           sudo echo /etc/docker/daemon.json
           echo "Restarting docker service"
