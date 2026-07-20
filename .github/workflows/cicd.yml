@@ -39,7 +39,7 @@ jobs:
       - name: Install Sysbox
         run: |
           apt-get install linux-headers-$(uname -r) -y
-          apt-get install ip -y
+          apt-get install iproute2 -y
           wget https://github.com/nestybox/sysbox/releases/download/v0.7.0/sysbox-ce_0.7.0.linux_amd64.deb
           apt-get install ./sysbox-ce_0.7.0.linux_amd64.deb -y
 
