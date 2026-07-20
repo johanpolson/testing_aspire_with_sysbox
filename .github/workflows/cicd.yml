@@ -38,6 +38,8 @@ jobs:
 
       - name: Install Sysbox
         run: |
+          apt-get install linux-headers-$(uname -r) -y
+          apt-get install ip -y
           wget https://github.com/nestybox/sysbox/releases/download/v0.7.0/sysbox-ce_0.7.0.linux_amd64.deb
           apt-get install ./sysbox-ce_0.7.0.linux_amd64.deb -y
 
@@ -48,8 +50,8 @@ jobs:
           echo "addinging time-namespaces false to docker daemon.json"
           cat /etc/docker/daemon.json | jq '.features += { "time-namespaces": false }' | tee /etc/docker/daemon.json
           
-          echo "Restarting docker service"
-          pkill -SIGHUP dockerd
+          # echo "Restarting docker service"
+          # pkill -SIGHUP dockerd
 
       - name: dotnet run
         run: |
