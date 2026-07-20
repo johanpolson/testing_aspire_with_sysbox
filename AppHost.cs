@@ -13,7 +13,8 @@ var openBao = builder.AddContainer("OpenBao", "quay.io/openbao/openbao", tag)
 .WithContainerName("openbao_" + tag)
 .WithEnvironment("BAO_DEV_ROOT_TOKEN_ID", "TestRootTokenId")
 .WithHttpEndpoint(port, 8200, isProxied: false)
-.WithContainerRuntimeArgs("--runtime=sysbox-runc");
+//.WithContainerRuntimeArgs("--runtime=sysbox-runc")
+;
 
 // https://learn.arm.com/install-guides/sysbox/
 

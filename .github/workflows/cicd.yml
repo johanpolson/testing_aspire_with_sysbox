@@ -58,6 +58,8 @@ jobs:
           echo "addinging time-namespaces false to docker daemon.json"
           cat /etc/docker/daemon.json | jq '. += { "default-runtime": "sysbox-runc" }' | tee /etc/docker/daemon.json
 
+          cat /etc/docker/daemon.json
+
           # echo "Restarting docker service"
           # pkill -SIGHUP dockerd
           
