@@ -15,10 +15,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Sysbox
+      - name: Install Docker
         run: |
           apt update -y
-          apt install ca-certificates curl
+          apt install continueca-certificates curl -y
           install -m 0755 -d /etc/apt/keyrings
           curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
           chmod a+r /etc/apt/keyrings/docker.asc
@@ -39,12 +39,12 @@ jobs:
       - name: Install Sysbox
         run: |
           wget https://github.com/nestybox/sysbox/releases/download/v0.7.0/sysbox-ce_0.7.0.linux_amd64.deb
-          sudo apt-get install ./sysbox-ce_0.7.0.linux_amd64.deb -y
-          sudo apt-get install jq -y
-          sudo echo /etc/docker/daemon.json | jq '. + { features: [{ "time-namespaces": false }]}' > /etc/docker/daemon.json
-          sudo echo /etc/docker/daemon.json
+          apt-get install ./sysbox-ce_0.7.0.linux_amd64.deb -y
+          apt-get install jq -y
+          echo /etc/docker/daemon.json | jq '. + { features: [{ "time-namespaces": false }]}' > /etc/docker/daemon.json
+          echo /etc/docker/daemon.json
           echo "Restarting docker service"
-          sudo systemctl restart docker
+          systemctl restart docker
 
       - name: dotnet run
         run: dotnet run
