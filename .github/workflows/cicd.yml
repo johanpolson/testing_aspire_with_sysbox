@@ -40,16 +40,24 @@ jobs:
         run: |
           wget https://github.com/nestybox/sysbox/releases/download/v0.7.0/sysbox-ce_0.7.0.linux_amd64.deb
           apt-get install ./sysbox-ce_0.7.0.linux_amd64.deb -y
+
+      - name: re configure docker
+        run: |
           apt-get install jq -y
+          
           echo "Checking before docker daemon.json"
           cat /etc/docker/daemon.json
+          
           echo "test adding time-namespaces false to docker daemon.json"
           cat /etc/docker/daemon.json | jq '.features += { "time-namespaces": false }' 
-          cat /etc/docker/daemon.json | jq '.features += { "time-namespaces": false }' > /etc/docker/daemon.json
+          
+          cat /etc/docker/daemon.json | jq '.features += { "time-namespaces": false }' | tee /etc/docker/daemon.json
+          
           echo "Checking after docker daemon.json"
           cat /etc/docker/daemon.json
-          echo "Restarting docker service"
-          #systemctl restart docker
+          
+          # echo "Restarting docker service"
+          # systemctl restart docker
 
       - name: dotnet run
         run: |
