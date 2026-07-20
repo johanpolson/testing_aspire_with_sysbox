@@ -40,7 +40,7 @@ jobs:
         run: |
           wget https://github.com/nestybox/sysbox/releases/download/v0.7.0/sysbox-ce_0.7.0.linux_amd64.deb
           apt-get install ./sysbox-ce_0.7.0.linux_amd64.deb -y
-          apt-get install jq -y
+          apt-get install jq sudo -y
           echo "Checking before docker daemon.json"
           cat /etc/docker/daemon.json
           /etc/docker/daemon.json > jq '.features +=  [{ "time-namespaces": false }]' | sudo tee /etc/docker/daemon.json
