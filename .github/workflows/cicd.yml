@@ -46,10 +46,16 @@ jobs:
       - name: re configure docker
         run: |
           apt-get install jq -y
-          
+
+          # https://github.com/nestybox/sysbox/blob/master/docs/user-guide/install-package.md#docker-runtime-configuration
+          # https://docs.docker.com/reference/cli/dockerd/#daemon-configuration-file
+
           echo "addinging time-namespaces false to docker daemon.json"
           cat /etc/docker/daemon.json | jq '.features += { "time-namespaces": false }' | tee /etc/docker/daemon.json
           
+          echo "addinging time-namespaces false to docker daemon.json"
+          cat /etc/docker/daemon.json | jq '. += { "default-runtime": "sysbox-runc" }' | tee /etc/docker/daemon.json
+
           # echo "Restarting docker service"
           # pkill -SIGHUP dockerd
 

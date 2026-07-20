@@ -21,9 +21,13 @@ var app = builder.Build();
 await app.StartAsync();
 
 System.Console.WriteLine("Testing Server Is initialized");
-System.Console.WriteLine(await TestServerIsinitialized());
+
+var status = await TestServerIsinitialized();
+System.Console.WriteLine("status: " + status);
 
 await app.StopAsync();
+
+return status ? 0 : 1;
 
 async Task<bool> TestServerIsinitialized()
 {
