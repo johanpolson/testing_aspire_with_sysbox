@@ -1,6 +1,10 @@
 using Microsoft.Extensions.Configuration;
 
-var builder = DistributedApplication.CreateBuilder(args);
+var builder = DistributedApplication.CreateBuilder(new DistributedApplicationOptions
+    {
+        Args = args,
+        EnableResourceLogging = true,
+    });
 
 var tag = builder.Configuration.GetValue("tag", "2.2.0");
 var port = builder.Configuration.GetValue("port", 8200);
@@ -28,7 +32,7 @@ async Task<bool> TestServerIsinitialized()
     {
         try
         {
-            var response = await httpClient.GetAsync(" http://localhost:" + port + "/v1/sys/init");
+            var response = await httpClient.GetAsync("http://localhost:" + port + "/v1/sys/init");
             var content = await response.Content.ReadAsStringAsync();
 
             if (content == "{\"initialized\":true}\n")
