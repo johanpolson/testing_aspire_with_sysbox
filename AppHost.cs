@@ -33,7 +33,7 @@ return status ? 0 : 1;
 async Task<bool> TestServerIsinitialized()
 {
     using var httpClient = new HttpClient();
-    for (int i = 0; i < 50; i++)
+    for (int i = 0; i < 100; i++)
     {
         try
         {
