@@ -43,7 +43,6 @@ async Task<bool> TestServerIsinitialized()
             if (content == "{\"initialized\":true}\n")
                 return true;
         }
-
         catch (Exception)
         {
         }

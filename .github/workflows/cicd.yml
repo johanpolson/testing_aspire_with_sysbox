@@ -39,6 +39,7 @@ jobs:
           docker info | grep -i runtime
 
       - name: Install Sysbox
+        if: false
         run: |
           apt-get install linux-headers-$(uname -r) -y
           apt-get install iproute2 -y
@@ -46,6 +47,7 @@ jobs:
           apt-get install ./sysbox-ce_0.7.0.linux_amd64.deb -y
 
       - name: re configure docker
+        if: false
         run: |
           apt-get install jq -y
 
