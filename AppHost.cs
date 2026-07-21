@@ -21,10 +21,10 @@ var openBao = builder.AddContainer("OpenBao", "quay.io/openbao/openbao", tag)
 var app = builder.Build();
 await app.StartAsync();
 
-System.Console.WriteLine("Testing Server Is initialized");
+Console.WriteLine("Testing Server Is initialized");
 
 var status = await TestServerIsinitialized();
-System.Console.WriteLine("status: " + status);
+Console.WriteLine("status: " + status);
 
 await app.StopAsync();
 

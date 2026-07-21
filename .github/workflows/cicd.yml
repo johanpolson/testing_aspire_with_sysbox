@@ -62,7 +62,7 @@ jobs:
 
           cat /etc/docker/daemon.json
 
-          # echo "Restarting docker service"
+          # echo "Restarting docker servicesservice"
           # pkill -SIGHUP dockerd
           
           docker info | grep -i runtime
@@ -70,4 +70,5 @@ jobs:
       - name: dotnet run
         run: |
           # export ASPIRE_ALLOW_UNSECURED_TRANSPORT=true
+          export ASPIRE_ENABLE_CONTAINER_TUNNEL=false
           dotnet run
