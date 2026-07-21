@@ -33,7 +33,7 @@ return status ? 0 : 1;
 async Task<bool> TestServerIsinitialized()
 {
     using var httpClient = new HttpClient();
-    for (int i = 0; i < 200; i++)
+    for (int i = 0; i < 60; i++)
     {
         try
         {
@@ -42,12 +42,14 @@ async Task<bool> TestServerIsinitialized()
 
             if (content == "{\"initialized\":true}\n")
                 return true;
+            Console.WriteLine("Server not initialized yet, response: " + content);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
+            Console.WriteLine("Error occurred while testing server initialization: " + ex.Message);
         }
 
-        await Task.Delay(1000);
+        await Task.Delay(2000);
     }
 
     return false;
