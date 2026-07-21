@@ -7,7 +7,9 @@ var builder = DistributedApplication.CreateBuilder(new DistributedApplicationOpt
     });
 
 var tag = builder.Configuration.GetValue("tag", "2.2.0");
+Console.WriteLine("Using tag: " + tag);
 var port = builder.Configuration.GetValue("port", 8200);
+Console.WriteLine("Using port: " + port);
 
 var openBao = builder.AddContainer("OpenBao", "quay.io/openbao/openbao", tag)
 .WithContainerName("openbao_" + tag)
@@ -15,8 +17,6 @@ var openBao = builder.AddContainer("OpenBao", "quay.io/openbao/openbao", tag)
 .WithHttpEndpoint(port, 8200, isProxied: false)
 //.WithContainerRuntimeArgs("--runtime=sysbox-runc")
 ;
-
-// https://learn.arm.com/install-guides/sysbox/
 
 var app = builder.Build();
 await app.StartAsync();
@@ -33,7 +33,7 @@ return status ? 0 : 1;
 async Task<bool> TestServerIsinitialized()
 {
     using var httpClient = new HttpClient();
-    for (int i = 0; i < 60; i++)
+    for (int i = 0; i < 30; i++)
     {
         try
         {
@@ -49,7 +49,7 @@ async Task<bool> TestServerIsinitialized()
             Console.WriteLine("Error occurred while testing server initialization: " + ex.Message);
         }
 
-        await Task.Delay(2000);
+        await Task.Delay(5000);
     }
 
     return false;

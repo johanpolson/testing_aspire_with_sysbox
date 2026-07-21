@@ -16,6 +16,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install Docker
+        if: false
         run: |
           apt update -y
           apt install ca-certificates curl -y
