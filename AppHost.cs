@@ -37,7 +37,7 @@ async Task<bool> TestServerIsinitialized()
     {
         try
         {
-            var response = await httpClient.GetAsync("http://localhost:" + port + "/v1/sys/init");
+            var response = await httpClient.GetAsync("http://127.0.0.1:" + port + "/v1/sys/init");
             var content = await response.Content.ReadAsStringAsync();
 
             if (content == "{\"initialized\":true}\n")
